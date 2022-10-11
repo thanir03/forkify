@@ -12,8 +12,6 @@ import { getID } from '../helpers.js';
 import uploadRecipeView from '../views/uploadRecipeView.js'; // need to import although the uploadRecipeView is not called (reason : to execute the uploadRecipeView)
 import { DELAY_TIME_RENDER } from '../config.js';
 
-
-
 const controlRecipes = async function () {
   try {
     // 1. Getting the id from the url
@@ -105,31 +103,34 @@ const controlLoadBookmark = function () {
 
 const controlUploadRecipe = async function (recipeData) {
   try {
-    // render spinner 
-    uploadRecipeView.renderSpinner()
+    // render spinner
+    uploadRecipeView.renderSpinner();
     // convert the recipe data from array to json
     model.convertJSON(recipeData);
-    // post request 
+    // post request
     await model.postUploadedData();
-    // change the hash to the newly added recipe 
-    window.history.pushState(null , "" , `#${model.state.recipe.id}`)
+    // change the hash to the newly added recipe
+    window.history.pushState(null, '', `#${model.state.recipe.id}`);
     // add it as bookmark
     controlBookmarks();
     // render successfull message
-    uploadRecipeView.renderDefaultMessage()
+    uploadRecipeView.renderDefaultMessage();
     // timeout to remove the form modal
     await new Promise(function (resolve, reject) {
       setTimeout(() => {
         uploadRecipeView.toggleForm();
-        resolve()
+        resolve();
       }, DELAY_TIME_RENDER * 1000);
-    }) 
+    });
   } catch (error) {
     console.error(error);
-    // to handle error 
+    // to handle error
     uploadRecipeView.handleError(error.message);
+  } finally {
+    setTimeout(() => {
+      uploadRecipeView.render();
+    }, DELAY_TIME_RENDER * 1000);
   }
-  uploadRecipeView.render()
 };
 
 const init = function () {
@@ -154,4 +155,3 @@ init();
 // MVC Architecture
 
 // publisher - subscriber pattern
-
