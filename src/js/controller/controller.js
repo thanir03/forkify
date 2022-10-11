@@ -124,12 +124,12 @@ const controlUploadRecipe = async function (recipeData) {
         resolve()
       }, DELAY_TIME_RENDER * 1000);
     }) 
-    uploadRecipeView.render()
   } catch (error) {
     console.error(error);
     // to handle error 
     uploadRecipeView.handleError(error.message);
   }
+  uploadRecipeView.render()
 };
 
 const init = function () {
