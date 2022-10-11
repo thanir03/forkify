@@ -12,9 +12,7 @@ import { getID } from '../helpers.js';
 import uploadRecipeView from '../views/uploadRecipeView.js'; // need to import although the uploadRecipeView is not called (reason : to execute the uploadRecipeView)
 import { DELAY_TIME_RENDER } from '../config.js';
 
-if (module.hot) {
-  module.hot.accept();
-}
+
 
 const controlRecipes = async function () {
   try {
