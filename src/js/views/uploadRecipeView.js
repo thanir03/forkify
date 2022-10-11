@@ -90,3 +90,6 @@ export default new UploadRecipeView();
 //    post request (state)
 //    Add Bookmark (state & controller)
 //    Display user when fetch (view)
+const newFeature = function () {
+  console.log('Welcome new Feature ');
+}
